@@ -21,7 +21,7 @@ module.exports = function(request, response) {
         client.messages.create({
             body: config[service],
             from: config.callerid,
-            statusCallback: config.serverurl + '/status/',
+            statusCallback: config.serverurl + '/status/' + config.apipassword,
             to: '+' + to
           }).then((message) => { 
                 smssid = message.sid;
