@@ -8,9 +8,14 @@ module.exports = function(request, response) {
 
     const client = require('twilio')(accountSid, authToken);
 
-    var to = request.body.to;
-    var user = request.body.user;
+    var to = request.body.to || null;
+    var user = request.body.user || null;
     var service = request.body.service + 'sms';
+
+    if(to == null || user == null || service == null) { 
+        response.send('Please post all the informations needed.'); 
+        return false; 
+    }
 
     if(config[service] == undefined) {
         response.send('The service wasn\'t recognised.'); 
