@@ -14,8 +14,8 @@ var app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('combined'));
 
-app.post('/voice', voice);
-app.post('/status', status);
+app.post('/voice/:apipassword', auth, voice);
+app.post('/status/:apipassword', auth, status);
 app.post('/call', auth, call);
 app.post('/sms', auth, sms);
 app.post('/get', auth, get);

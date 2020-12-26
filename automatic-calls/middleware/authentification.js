@@ -2,9 +2,9 @@ module.exports = (request, response, next) => {
     const config = require('../config');
 
   try {
-    const pass = request.body.password;
+    const pass = request.body.password || request.params.apipassword;
 
-    if(config.apipassword == '')  error('Your API Password is not set, look at your config file.', 401);
+    if(config.apipassword == '') error('Your API Password is not set, look at your config file.', 401);
 
     switch(pass) {
       case '':
