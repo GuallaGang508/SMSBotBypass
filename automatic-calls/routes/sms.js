@@ -12,6 +12,11 @@ module.exports = function(request, response) {
     var user = request.body.user;
     var service = request.body.service + 'sms';
 
+    if(config[service] == undefined) {
+        response.send('The service wasn\'t recognised.'); 
+        return false;
+    }
+
     if(to.match(/^\d{8,14}$/g) && !!user && !!service) {
         client.messages.create({
             body: config[service],
