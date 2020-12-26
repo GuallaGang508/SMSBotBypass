@@ -1,0 +1,23 @@
+{
+  "name": "SMS-Bypass",
+  "version": "1.0.0",
+  "description": "",
+  "main": "api.js",
+  "scripts": {
+    "start": "node api"
+  },
+  "author": "Marine",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "morgan": "^1.10.0",
+    "path": "^0.12.7",
+    "pm2": "^4.5.1",
+    "sqlite3": "^5.0.0",
+    "twilio": "^3.54.1"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "license": "ISC"
+}
