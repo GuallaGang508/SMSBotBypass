@@ -1,22 +1,17 @@
 module.exports = {
-    accountSid: 'ACbc3069f5618b8235e76c432377f0c6ee',
-    authToken: '95a76e3483b08a734dd92bacc5232019',
+    accountSid: 'ACe94d29e6379c3013b5495e2c129b75e9',
+    authToken: 'f0e804b66bbf9acfbb72c5439ad1315d',
 
-    serverurl: 'http://8b518f0ae606.ngrok.io', 
+    serverurl: 'http://5faf2ffdc6b6.ngrok.io', 
     apipassword: '4ZMSTeSpX8FD9er9ymNKAHUms74fFjAf', 
-    callerid: '+14793482584', 
+    callerid: '+14793482767',
 
     port: process.env.PORT || 1337, 
 
-    paypal: 'http://8b518f0ae606.ngrok.io/stream/paypal',
     paypalfilepath: './voice/fr/pp/ask-pp.mp3',
-    snapchat: '',
     snapchatfilepath: '',
-    instagram: '',
     instagramfilepath: '',
-    facebook: '',
     facebookfilepath: '',
-    end: 'http://8b518f0ae606.ngrok.io/stream/end',
     endfilepath: './voice/fr/done/call-done.mp3',
     default :'',
 
