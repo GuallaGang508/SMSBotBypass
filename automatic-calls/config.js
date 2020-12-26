@@ -2,7 +2,7 @@ module.exports = {
     accountSid: 'ACe94d29e6379c3013b5495e2c129b75e9',
     authToken: 'f0e804b66bbf9acfbb72c5439ad1315d',
 
-    serverurl: 'http://5faf2ffdc6b6.ngrok.io', 
+    serverurl: 'http://176.169.193.232:1337', 
     apipassword: '4ZMSTeSpX8FD9er9ymNKAHUms74fFjAf', 
     callerid: '+14793482767',
 
