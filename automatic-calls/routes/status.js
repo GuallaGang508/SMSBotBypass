@@ -1,23 +1,40 @@
-module.exports = function(request) {
+const { response } = require('express');
+
+module.exports = function(request, response) {
     var itsfrom = request.body.From;
     var itsto = request.body.To;
-    var status = request.body.CallStatus;
-    var callSid = request.body.CallSid;
+    var sid = request.body.CallSid;
+    var table = null;
+    var sidname = null;
+    if(sid != undefined) {
+        var status = request.body.CallStatus;
+        table = 'calls';
+        sidname = 'callSid';
+    } else {
+        sid = request.body.SmsSid;
+        var status = request.body.SmsStatus;
+        table = 'sms';
+        sidname = 'smssid';
+    }
     var date = Date.now();
 
     const sqlite3 = require('sqlite3').verbose();
     const db = new sqlite3.Database('./db/data.db');
 
-    db.get('SELECT callSid text FROM calls WHERE callSid = ?', [callSid], (err, row) => {
+    db.get('SELECT ' + sidname + ' text FROM ' + table + ' WHERE ' + sidname + ' = ?', [sid], (err, row) => {
         if (err) { return console.log(err.message); }
     
         if(row == undefined) { 
-            db.run(`INSERT INTO calls(itsfrom, itsto, status, callSid, date) VALUES(?, ?, ?, ?, ?)`, [itsfrom, itsto, status, callSid, date], function(err) {
+            db.run('INSERT INTO ' + table + '(itsfrom, itsto, status, ' + sidname + ', date) VALUES(?, ?, ?, ?, ?)', [itsfrom, itsto, status, sid, date], function(err) {
                 if (err) { return console.log(err.message); }
+
+                return response.send('Ok.');
               });
         } else {
-            db.run(`UPDATE calls SET status = ?, itsfrom = ?, itsto = ?, date = ? WHERE callSid = ?`, [status, itsfrom, itsto, date, callSid], function(err) {
+            db.run('UPDATE ' + table + ' SET status = ?, itsfrom = ?, itsto = ?, date = ? WHERE ' + sidname + ' = ?', [status, itsfrom, itsto, date, sid], function(err) {
                 if (err) { return console.log(err.message); }
+
+                return response.send('Ok.');
             });
         }
     });
