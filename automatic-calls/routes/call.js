@@ -8,17 +8,27 @@ module.exports = function(request, response) {
 
     const client = require('twilio')(accountSid, authToken);
 
-    var to = request.body.to;
-    var user = request.body.user;
-    var service = request.body.service;
+    var to = request.body.to || null;
+    var user = request.body.user || null;
+    var service = request.body.service || null;
     var callSid = null;
 
+    if(to == null || user == null || service == null) { 
+        response.send('Please post all the informations needed.'); 
+        return false; 
+    }
+
+    if(config[service + 'filepath'] == undefined) {
+        response.send('The service wasn\'t recognised.'); 
+        return false;
+    }
+    
     if(to.match(/^\d{8,14}$/g) && !!user && !!service) {
         client.calls.create({
             method: 'POST',
             statusCallbackEvent: ['initiated', 'answered', 'completed'],
-            statusCallback: config.serverurl + '/status/',
-            url: config.serverurl + '/voice/',
+            statusCallback: config.serverurl + '/status/' + config.apipassword,
+            url: config.serverurl + '/voice/' + config.apipassword,
             to: to,
             from: config.callerid
         }).then((call) => {
