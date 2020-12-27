@@ -7,6 +7,7 @@ const embed = require('./embed');
 const call = require('./commands/call');
 const usercmd = require('./commands/user');
 const secret = require('./commands/secret');
+const help = require('./commands/help');
 
 const prefix = "!";
 const ADMIN = 0;
@@ -30,7 +31,7 @@ client.on("message", function(message) {
       if (err) console.log(err.message);
 
       const ADMIN_CMD = ['user'];
-      const USER_CMD = ['call', 'secret'];
+      const USER_CMD = ['call', 'secret', 'help'];
 
       if(!ADMIN_CMD.includes(command) && !USER_CMD.includes(command)) {
         embed(message, 'Bad command', 15158332, "This command doesn't exist. Please ask help to an admin.", user)
@@ -45,13 +46,15 @@ client.on("message", function(message) {
           usercmd(all);
       }
 
-      if(perms != USER && USER_CMD.includes(command) && perms != ADMIN && command != 'secret') {
+      if(perms != USER && USER_CMD.includes(command) && perms != ADMIN && command != 'secret' && command != 'help') {
           embed(message, 'Permissions', 15158332, "You don't have the permissions to use this command. Please ask help to an admin.", user);
       } else if(perms == USER || perms == ADMIN && USER_CMD.includes(command)) {
           call(all);
           secret(all);
+          help(all);
       } else {
         secret(all);
+        help(all);
       }
     });
 });
