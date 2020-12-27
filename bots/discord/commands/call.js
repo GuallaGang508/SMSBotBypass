@@ -15,7 +15,7 @@ module.exports = function(m) {
         password: config.apipassword,
         to: m.args['0'],
         user: m.user,
-        service: m.args['1']
+        service: m.args['1'].toLowerCase()
     }))
     .catch(error => {
         console.error(error)

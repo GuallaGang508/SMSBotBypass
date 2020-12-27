@@ -19,7 +19,7 @@ client.on("message", function(message) {
     if (message.author.bot) return;
     if (!message.content.startsWith(prefix)) return;
 
-    const commandBody = message.content.slice(prefix.length);
+    const commandBody = message.content.slice(prefix.length).toLowerCase();
     const args = commandBody.split(' ');
     const command = args.shift().toLowerCase();
     const user = "@" + message.author.username + '#' + message.author.discriminator;
