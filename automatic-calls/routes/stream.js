@@ -1,33 +1,39 @@
 module.exports = function(req, res) {
+    /**
+     * Fichier contenant les configurations nécéssaires au bon fonctionnement du système
+     */
     const config = require('.././config');
 
-    const service = req.params.service + 'filepath';
+    /**
+     * Intégration des dépendences FS permettant de modifier des fichiers
+     */
     const fs = require('fs');
 
+    /**
+     * Création d'une variable stockant le nom du service à aller chercher dans le fichier config
+     */
+    const service = req.params.service + 'filepath';
+
+    /**
+     * Si il existe bien un le service dans le fichier config, alors continuer
+     */
     if(!!config[service] && config[service] != undefined) {
+        /**
+         * Récupération du chemin de stockage du fichier audio
+         */
         const filePath = config[service];
+
+        /**
+         * Calcul de la taille du fichier audio
+         */
         var stat = fs.statSync(filePath);
         var total = stat.size;
-        if (req.headers.range) {
-            var range = req.headers.range;
-            var parts = range.replace(/bytes=/, "").split("-");
-            var partialstart = parts[0];
-            var partialend = parts[1];
-    
-            var start = parseInt(partialstart, 10);
-            var end = partialend ? parseInt(partialend, 10) : total-1;
-            var chunksize = (end-start)+1;
-            var readStream = fs.createReadStream(filePath, {start: start, end: end});
-            res.writeHead(206, {
-                'Content-Range': 'bytes ' + start + '-' + end + '/' + total,
-                'Accept-Ranges': 'bytes', 'Content-Length': chunksize,
-                'Content-Type': 'video/mp4'
-            });
-                readStream.pipe(res);
-            } else {
-                res.writeHead(200, { 'Content-Length': total, 'Content-Type': 'audio/mpeg' });
-                fs.createReadStream(filePath).pipe(res);
-            }
+        
+        /**
+         * Modification du header pour que le fichier puisse être utilisable par Twilio
+         */
+        res.writeHead(200, { 'Content-Length': total, 'Content-Type': 'audio/mpeg' });
+        fs.createReadStream(filePath).pipe(res);
     } else {
         res.send('Bad service.');
     }

