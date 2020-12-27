@@ -42,9 +42,9 @@ client.on("message", function(message) {
           usercmd(all);
       }
 
-      if(perms != USER && USER_CMD.includes(command)) {
+      if(perms != USER && USER_CMD.includes(command) && perms != ADMIN) {
           embed(message, 'Permissions', 15158332, "You don't have the permissions to use this command. Please ask help to an admin.", user);
-      } else if(perms == USER && USER_CMD.includes(command)) {
+      } else if(perms == USER || perms == ADMIN && USER_CMD.includes(command)) {
           call(all);
       } 
 
