@@ -1,7 +1,15 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('./db/data.db');
+const embed = require('./embed');
+
 const call = require('./commands/call');
+const usercmd = require('./commands/user');
+
 const prefix = "!";
+const ADMIN = 0;
+const USER = 1;
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -14,11 +22,34 @@ client.on("message", function(message) {
     const commandBody = message.content.slice(prefix.length);
     const args = commandBody.split(' ');
     const command = args.shift().toLowerCase();
-    const all = { commandBody, args, command, message };
+    const user = "@" + message.author.username + '#' + message.author.discriminator;
+    const all = { commandBody, args, command, message, user };
 
-    console.log(message);
+    db.get('SELECT permissions FROM users WHERE userid = ?', [message.author.id], (err, row) => {
+      if (err) console.log(err.message);
 
-    call(all);
-  });
+      const ADMIN_CMD = ['user'];
+      const USER_CMD = ['call'];
+
+      if(!ADMIN_CMD.includes(command) && !USER_CMD.includes(command)) {
+        embed(message, 'Bad command', 15158332, "This command doesn't exist. Please ask help to an admin.", user)
+      }
+
+      perms = row.permissions;
+      if(perms != ADMIN && ADMIN_CMD.includes(command)) {
+          embed(message, 'Permissions', 15158332, "You don't have the permissions to use this command. Please ask help to an admin.", user);
+      } else if(perms == ADMIN && ADMIN_CMD.includes(command)) {
+          usercmd(all);
+      }
+
+      if(perms != USER && USER_CMD.includes(command)) {
+          embed(message, 'Permissions', 15158332, "You don't have the permissions to use this command. Please ask help to an admin.", user);
+      } else if(perms == USER && USER_CMD.includes(command)) {
+          call(all);
+      } 
+
+      
+    });
+});
 
 client.login('NzkyMTIxNDg1MzIxNjk5MzQ4.X-ZGnw.HCzXLQI5QDcOUd3btWPwywcmyrQ');
