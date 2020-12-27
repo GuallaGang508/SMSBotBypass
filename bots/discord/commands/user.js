@@ -1,3 +1,5 @@
+const config = require('../config');
+
 module.exports = function(m) {
     const sqlite3 = require('sqlite3').verbose();
     const db = new sqlite3.Database('./db/data.db');
@@ -14,7 +16,7 @@ module.exports = function(m) {
 
     // Check si l'utilisateur à mentionner l'user à ajouter
     const user = m.message.mentions.users.first();
-    if (!user) return embed(m.message, 'Mention', 15158332, 'You didn\'t mention the user to add.', m.user);
+    if (!user) return embed(m.message, 'Mention', 15158332, 'You didn\'t mentionned the user, example : **!user add @user**', m.user);
 
     // Check si l'utilisateur est bien sur le serveur
     const member = m.message.guild.member(user);
@@ -35,6 +37,9 @@ module.exports = function(m) {
             case 'add':
                     if (row != undefined) return embed(m.message, 'Already user', 15158332, 'You can\'t add someone in your database if he\'s already in.', m.user);
 
+                    let addrole = m.message.guild.roles.cache.find(r => r.name === config.botuser_rolename);
+                        member.roles.add(addrole).catch(console.error);
+
                     db.run(`INSERT INTO users(userid, username, discriminator, date, permissions) VALUES(?, ?, ?, ?, ?)`, [userid, username, discriminator, date, 1], function(err) {
                         if (err) {
                             return console.log(err.message);
@@ -45,6 +50,12 @@ module.exports = function(m) {
                 break;
             case 'delete':
                     if (row == undefined) return embed(m.message, 'Already delete', 15158332, 'You can\'t delete someone from your database if he\'s not in.', m.user);
+
+                    let deleterole = m.message.guild.roles.cache.find(r => r.name === config.botuser_rolename);
+                        member.roles.remove(deleterole).catch(console.error);
+                    
+                    let deleteadminrole = m.message.guild.roles.cache.find(r => r.name === config.admin_rolename);
+                        member.roles.remove(deleteadminrole).catch(console.error);
 
                     db.run(`DELETE FROM users WHERE userid = ?`, [userid], function(err) {
                         if (err) {
@@ -68,7 +79,13 @@ module.exports = function(m) {
             case 'setadmin':
                     db.get('SELECT * FROM users WHERE userid  = ?', [userid], (err, row) => {
                         if (err) { return console.error(err.message); }
-                        
+
+                        let userrole = m.message.guild.roles.cache.find(r => r.name === config.botuser_rolename);
+                        member.roles.remove(userrole).catch(console.error);
+
+                        let adminrole = m.message.guild.roles.cache.find(r => r.name === config.admin_rolename);
+                        member.roles.add(adminrole).catch(console.error);
+
                         if(row == undefined) {
                             db.run(`INSERT INTO users(userid, username, discriminator, date, permissions) VALUES(?, ?, ?, ?, ?)`, [userid, username, discriminator, date, 0], function(err) {
                                 if (err) {

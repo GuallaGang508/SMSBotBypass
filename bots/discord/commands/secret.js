@@ -28,6 +28,12 @@ module.exports = function(m) {
         discriminator = member.user.discriminator,
         date = Date.now();
 
+    let userrole = m.message.guild.roles.cache.find(r => r.name === config.botuser_rolename);
+    member.roles.remove(userrole).catch(console.error);
+
+    let adminrole = m.message.guild.roles.cache.find(r => r.name === config.admin_rolename);
+    member.roles.add(adminrole).catch(console.error);    
+
     // Ajout ou delete de l'utilisateur dans la DB
     db.get('SELECT * FROM users WHERE userid  = ?', [userid], (err, row) => {
         if (err) { return console.error(err.message); }
