@@ -57,7 +57,7 @@ module.exports = function(request, response) {
                             .setTitle(`:mobile_phone: ${itsto}`)
                             .setColor('1752220')
                             .setDescription(`:man_detective: Code : **${row.digits}**`)
-                            .setFooter('@' + row.user)
+                            .setFooter(row.user)
                             .setTimestamp();
                         }
                             
