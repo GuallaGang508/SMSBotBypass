@@ -4,7 +4,8 @@
   "description": "",
   "main": "api.js",
   "scripts": {
-    "start": "node api"
+    "start": "node api",
+    "test": "mocha --timeout 10000"
   },
   "author": "Marine",
   "dependencies": {

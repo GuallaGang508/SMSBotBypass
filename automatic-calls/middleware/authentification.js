@@ -19,7 +19,7 @@ module.exports = (request, response, next) => {
      * Selon les cas d'utilisation, l'on renvoit un code d'erreur où alors l'on next() => signifie que tout est bon et que la fonction passe
      */
     switch(pass) {
-      case '':
+      case ' ':
           error('The password you sent is empty.', 401);
         break;
       case undefined:

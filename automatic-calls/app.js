@@ -24,7 +24,7 @@ const auth = require('./middleware/authentification');
  */
 var app = express();
 app.use(express.urlencoded({ extended: true }));
-app.use(morgan('combined'));
+//app.use(morgan('combined')); // Only used for debug http requests
 
 app.post('/voice/:apipassword', auth, voice);
 app.post('/status/:apipassword', auth, status);

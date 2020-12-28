@@ -15,7 +15,7 @@ module.exports = {
     /**
      * Informations à propos du webhook discord
      */
-    discordwebhook: 'https://discord.com/api/webhooks/792590400811958314/zEZAThBDQu1CIdiR5TkyUTutmWKPIPta6GWDoeUmp3JApyZmnVDamsRtCAnxGqW3sTfZ',
+    discordwebhook: 'https://discord.com/api/webhooks/792790862291533835/fUCXY3etBUHIo2X5OBkIY5bL4QvWiwyovtz6GJ_28TMwvXJa77QfOX5pDc7rjl2onIt5',
 
     /**
      * Port sur lequel tourne le serveur express

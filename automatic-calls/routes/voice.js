@@ -17,6 +17,12 @@ module.exports = function(request, response) {
     var callSid = request.body.CallSid;
     var service = null;
 
+    if(!!!callSid) {
+        return response.status(200).json({
+            error: 'Please give us the callSid.'
+        });
+    }
+
     /**
      * On récupère le Service utilisé dans cet appel pour ensuite retourner le bon audio à utiliser
      */
@@ -24,10 +30,13 @@ module.exports = function(request, response) {
         if (err) { return console.log(err.message); }
 
         /**
-         * Au cas où le service n'est pas trouvé, on utilise l'audio par défaut
+         * Au cas où le callSid n'est pas trouvé, on utilise l'audio par défaut
          */
         service = row == undefined ? 'default' : row.service;
-
+        /**
+         * Au cas où le callSid est trouvé mais le service n'existe pas, on utilise l'audio par défaut
+         */
+        if(config[service + 'filepath'] == undefined) service = 'default';
         /**
          * L'on crée ici les url des audios grâce aux données dans le fichier config
          */

@@ -16,7 +16,7 @@ module.exports = function(request, response) {
     const sqlite3 = require('sqlite3').verbose();
     const db = new sqlite3.Database('./db/data.db');
 
-    /**
+     /**
      * Récupération des variables postées permettant d'ordonner la modification du status
      */
     var itsfrom = request.body.From;

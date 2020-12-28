@@ -11,7 +11,7 @@ module.exports = function(request, response) {
      * Commande GET à la DB pour récupérer les informations sur un appel passé, 
      * utilisation du callSid.
      */
-    db.get('SELECT callSid text FROM calls WHERE callSid = ?', [callSid], (err, row) => {
+    db.get('SELECT callSid FROM calls WHERE callSid = ?', [callSid], (err, row) => {
         if (err) { return console.log(err.message); }
     
         if(row == undefined) { 
@@ -31,12 +31,15 @@ module.exports = function(request, response) {
                 /**
                  * Retour des infos sous format JSON pour que ce soit plus pratique
                  */
-                response.status(401).json({
+                response.status(200).json({
                     itsto: row.itsto,
+                    itsfrom: row.itsfrom,
+                    callSid: row.callSid,
                     digits: row.digits,
-                    satus: row.status,
+                    status: row.status,
                     date: row.date,
-                    marine: row.user
+                    user: row.user,
+                    service: row.service
                   });
             });
         }
