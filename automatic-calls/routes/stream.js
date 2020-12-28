@@ -35,6 +35,8 @@ module.exports = function(req, res) {
         res.writeHead(200, { 'Content-Length': total, 'Content-Type': 'audio/mpeg' });
         fs.createReadStream(filePath).pipe(res);
     } else {
-        res.send('Bad service.');
+        return response.status(200).json({
+            error: 'Bad service.'
+          });
     }
 };

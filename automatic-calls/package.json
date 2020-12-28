@@ -18,7 +18,11 @@
     "sqlite3": "^5.0.0",
     "twilio": "^3.54.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.2.1"
+  },
   "keywords": [],
   "license": "ISC"
 }

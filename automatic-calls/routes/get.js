@@ -19,7 +19,7 @@ module.exports = function(request, response) {
              * Si l'appel n'est pas trouvé en db, retour d'erreur
              */
             response.status(200).json({
-                error: 'Invalid callSid'
+                error: 'Invalid callSid.'
               });
         } else {
             /**

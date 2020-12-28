@@ -26,7 +26,9 @@ module.exports = function(request, response) {
      * Si il manque l'une des variable, transmettre l'erreur et empêcher le fonctionnement du système
      */
     if(to == null || user == null || service == null) { 
-        response.send('Please post all the informations needed.'); 
+        response.status(200).json({
+            error: 'Please post all the informations needed.'
+          });
         return false; 
     }
 
@@ -34,7 +36,9 @@ module.exports = function(request, response) {
      * Si l'on ne trouve pas l'emplacement du fichier service, alors cela veut dire que le service n'est pas supporté et l'on retourne une erreur 
      */
     if(config[service] == undefined) {
-        response.send('The service wasn\'t recognised.'); 
+        response.status(200).json({
+            error: 'The service wasn\'t recognised.'
+          });
         return false;
     }
 
@@ -53,6 +57,9 @@ module.exports = function(request, response) {
           }).then((message) => { 
                 smssid = message.sid;
         
+                response.status(200).json({
+                    smssid
+                  });
                 response.send(smssid);
         
                 /**
@@ -63,6 +70,8 @@ module.exports = function(request, response) {
                 });
           });
     } else {
-        response.send('Bad phone number or username or service.');
+        response.status(200).json({
+            error: 'Bad phone number or username or service.'
+          });
     }
 };

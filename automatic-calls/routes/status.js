@@ -58,7 +58,9 @@ module.exports = function(request, response) {
             db.run('INSERT INTO ' + table + '(itsfrom, itsto, status, ' + sidname + ', date) VALUES(?, ?, ?, ?, ?)', [itsfrom, itsto, status, sid, date], function(err) {
                 if (err) { return console.log(err.message); }
 
-                return response.send('Ok.');
+                return response.status(200).json({
+                    inserted: 'All is alright.'
+                  });
               });
         } else {
             /**
@@ -110,7 +112,9 @@ module.exports = function(request, response) {
                     });
                 }
 
-                return response.send('Ok.');
+                return response.status(200).json({
+                    inserted: 'All is alright.'
+                  });
             });
 
             
