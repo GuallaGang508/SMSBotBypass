@@ -108,3 +108,5 @@ api/config.js
 api/db/data.db
 api/package-lock.json
 bots/telegram/package-lock.json
+api/config.js
+api/db/data.db
