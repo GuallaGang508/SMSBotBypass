@@ -1,28 +1,28 @@
 module.exports = {
-    setupdone: 'false',
+    setupdone: 'true',
 
     /**
      * Informations à propos du compte Twilio
      */
-    accountSid: '',
-    authToken: '',
-    callerid: '+yourcallerid',
+    accountSid: 'ACe94d29e6379c3013b5495e2c129b75e9',
+    authToken: 'f0e804b66bbf9acfbb72c5439ad1315d',
+    callerid: '+14793482767',
 
     /**
      * Informations à propos de l'API
      */
-    apipassword: 'passwordtochange', 
-    serverurl: 'http://yourserverip:1337', 
-    
+    apipassword: 'hM7OjopJ50h4Tjo7DzGPoyAbajVbSTwv',
+    serverurl: 'http://176.169.193.232:1337',
+
     /**
      * Informations à propos du webhook discord
      */
-    discordwebhook: '',
+    discordwebhook: 'https://discord.com/api/webhooks/792790862291533835/fUCXY3etBUHIo2X5OBkIY5bL4QvWiwyovtz6GJ_28TMwvXJa77QfOX5pDc7rjl2onIt5',
 
     /**
      * Port sur lequel tourne le serveur express
      */
-    port: process.env.PORT || 1337, 
+    port: process.env.PORT || 1337,
 
     /**
      * Chemins de stockage des fichiers audios
@@ -37,7 +37,7 @@ module.exports = {
     instagramfilepath: './voice/fr/instagram/ask-instagram.mp3',
     facebookfilepath: './voice/fr/facebook/ask-facebook.mp3',
     endfilepath: './voice/fr/done/call-done.mp3',
-    defaultfilepath:'./voice/fr/default/ask-default.mp3',
+    defaultfilepath: './voice/fr/default/ask-default.mp3',
 
     /**
      * Contenu des sms selon les services demandés
