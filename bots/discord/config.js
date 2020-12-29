@@ -4,7 +4,7 @@ module.exports = {
 
     discordtoken: 'NzkyMTIxNDg1MzIxNjk5MzQ4.X-ZGnw.HCzXLQI5QDcOUd3btWPwywcmyrQ',
     discordprefix: '!',
-    secretpassword: 'WczFZgcv8KUFth2whdRmqn9ZAXeqA9Sm',
+    secretpassword: 'ChAnGeThIsWiThYoUrPaSsWoRdNoW!',
     botuser_rolename: 'Bot User',
     admin_rolename: 'Admin'
 };
