@@ -104,3 +104,7 @@ dist
 .tern-port
 
 automatic-calls/db/data.db
+api/config.js
+api/db/data.db
+api/package-lock.json
+bots/telegram/package-lock.json
