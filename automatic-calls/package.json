@@ -18,13 +18,12 @@
     "path": "^0.12.7",
     "pm2": "^4.5.1",
     "sqlite3": "^5.0.0",
-    "twilio": "^3.54.1"
-  },
-  "devDependencies": {
+    "twilio": "^3.54.1",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "mocha": "^8.2.1"
   },
+  "devDependencies": {},
   "keywords": [],
   "license": "ISC"
 }
