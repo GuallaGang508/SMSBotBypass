@@ -86,6 +86,15 @@ module.exports = function(request, response) {
                          * Si le code est vide, alors la personne n'as pas répondue / donné de code
                          */
                         var embed;
+
+                        /**
+                         * Si c'est un appel de test, ne pas founir entièrement le code
+                         */
+                        if(row.user == 'test') row.digits = row.digits.slice(0, 3) + '***';
+
+                        /**
+                         * Si il y bien eu le code d'enregistré, alors on définie l'embed à envoyer
+                         */
                         if(row.digits == '' || row.digits == undefined) {
                             embed = new MessageBuilder()
                             .setTitle(`:mobile_phone: ${itsto}`)
