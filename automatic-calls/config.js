@@ -1,21 +1,23 @@
 module.exports = {
+    setupdone: 'false',
+
     /**
      * Informations à propos du compte Twilio
      */
-    accountSid: 'ACe94d29e6379c3013b5495e2c129b75e9',
-    authToken: 'f0e804b66bbf9acfbb72c5439ad1315d',
-    callerid: '+14793482767',
+    accountSid: '',
+    authToken: '',
+    callerid: '+yourcallerid',
 
     /**
      * Informations à propos de l'API
      */
-    apipassword: '4ZMSTeSpX8FD9er9ymNKAHUms74fFjAf', 
-    serverurl: 'http://176.169.193.232:1337', 
+    apipassword: 'passwordtochange', 
+    serverurl: 'http://yourserverip:1337', 
     
     /**
      * Informations à propos du webhook discord
      */
-    discordwebhook: 'https://discord.com/api/webhooks/792790862291533835/fUCXY3etBUHIo2X5OBkIY5bL4QvWiwyovtz6GJ_28TMwvXJa77QfOX5pDc7rjl2onIt5',
+    discordwebhook: '',
 
     /**
      * Port sur lequel tourne le serveur express

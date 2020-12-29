@@ -3,6 +3,8 @@
  */
 const express = require('express');
 const morgan = require('morgan');
+const setup = require('./setup');
+const config = require('./config');
 
 /**
  * Intégration des routes stockées dans /routes
@@ -18,6 +20,8 @@ const stream = require('./routes/stream');
  * Ajout du middleware d'authentification => vérifie si l'on utilise bien l'API avec un mot de passe
  */
 const auth = require('./middleware/authentification');
+
+if(config.setupdone == 'false') setup();
 
 /**
  * Partie express côté serveur web
