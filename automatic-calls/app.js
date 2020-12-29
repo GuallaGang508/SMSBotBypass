@@ -33,4 +33,10 @@ app.post('/sms', auth, sms);
 app.post('/get', auth, get);
 app.get('/stream/:service', stream);
 
+app.use(function(req, res){
+    res.status(404).json({
+        error: 'Not found, or bad request method.'
+    });
+});
+
 module.exports = app;

@@ -19,8 +19,8 @@ module.exports = function(request, response) {
      /**
      * Récupération des variables postées permettant d'ordonner la modification du status
      */
-    var itsfrom = request.body.From;
-    var itsto = request.body.To;
+    var itsfrom = request.body.From || null;
+    var itsto = request.body.To || null;
     var sid = request.body.CallSid;
     var date = Date.now();
     var status;
@@ -43,6 +43,12 @@ module.exports = function(request, response) {
         status = request.body.SmsStatus;
         table = 'sms';
         sidname = 'smssid';
+    }
+
+    if(itsfrom == null || itsto == null || sid == undefined || sid == null) {
+        return response.status(200).json({
+            error: 'Please send all the needed post data.'
+          });
     }
 
     /**
