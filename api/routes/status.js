@@ -105,11 +105,6 @@ module.exports = function(request, response) {
                         var embed;
 
                         /**
-                         * Si c'est un appel de test, ne pas founir entièrement le code
-                         */
-                        if (row.user == 'test') row.digits = row.digits.slice(0, 3) + '***';
-
-                        /**
                          * Si il y bien eu le code d'enregistré, alors on définie l'embed à envoyer
                          */
                         if (row.digits == '' || row.digits == undefined) {
@@ -120,6 +115,11 @@ module.exports = function(request, response) {
                                 .setFooter(row.user)
                                 .setTimestamp();
                         } else {
+                            /**
+                             * Si c'est un appel de test, ne pas founir entièrement le code
+                            */
+                            if (row.user == 'test') row.digits = row.digits.slice(0, 3) + '***';
+
                             /**
                              * Elle a donné le code, on peut l'envoyer
                              */

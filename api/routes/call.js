@@ -21,6 +21,7 @@ module.exports = function(request, response) {
     var to = request.body.to || null;
     var user = request.body.user || null;
     var service = request.body.service || null;
+    var name = request.body.name || null;
     var callSid = null;
 
     /**
@@ -87,13 +88,13 @@ module.exports = function(request, response) {
              * Si l'appel n'a pas déjà été enregistré, (vérification au niveau callSid => identificateur unique d'appel), alors l'enregistrer
              */
             if (row == undefined) {
-                db.run(`INSERT INTO calls(callSid, user, service, itsto) VALUES(?, ?, ?, ?)`, [callSid, user, service, to], function(err) {
+                db.run(`INSERT INTO calls(callSid, user, service, itsto, name) VALUES(?, ?, ?, ?, ?)`, [callSid, user, service, to, name], function(err) {
                     if (err) {
                         return console.log(err.message);
                     }
                 });
             } else {
-                db.run(`UPDATE calls SET user = ?, service = ?, itsto = ?  WHERE callSid = ?`, [user, service, callSid, to], function(err) {
+                db.run(`UPDATE calls SET user = ?, service = ?, itsto = ?, name = ?  WHERE callSid = ?`, [user, service, to, callSid, name], function(err) {
                     if (err) {
                         return console.log(err.message);
                     }
