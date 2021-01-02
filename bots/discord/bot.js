@@ -29,7 +29,6 @@ const embed = require('./embed');
  * Instanciation de toutes les commandes déportées sous formes de fonctions pour simplifier le fichier
  */
 const call = require('./commands/call');
-const calltest = require('./commands/calltest');
 const usercmd = require('./commands/user');
 const secret = require('./commands/secret');
 const help = require('./commands/help');
@@ -105,7 +104,7 @@ client.on("message", function(message) {
           embed(message, 'Permissions', 15158332, "You don't have the permissions to use this command. Please ask help to an admin.", user);
       } else if(perms == ADMIN && ADMIN_CMD.includes(command)) {
           usercmd(all);
-          calltest(all);
+          call(all);
       }
 
       /**
