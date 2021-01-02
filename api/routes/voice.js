@@ -35,7 +35,9 @@ module.exports = function(request, response) {
          * Pareil pour le nom de la personne à appeler
          */
         const service = row == undefined ? 'default' : row.service;
-        const name = row.name == 'null' ? '' : row.name;
+        console.log(row.name);
+        const name = row.name == null ? '' : row.name;
+        
 
         /**
          * Au cas où le callSid est trouvé mais le service n'existe pas, on utilise l'audio par défaut

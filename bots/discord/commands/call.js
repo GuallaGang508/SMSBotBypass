@@ -35,6 +35,7 @@ module.exports = function(m) {
      * Si la commande est !calltest alors l'on passe en call de test avec l'user test
      */
     m.user = m.command == "calltest" ? 'test' : m.user;
+    m.args['2'] = m.args['2'] == undefined ? '' : m.args['2'];
 
     /**
      * Si toutes les conditions ont été passées, alors envoyer une requête à l'api d'appel
