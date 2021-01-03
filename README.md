@@ -34,7 +34,7 @@ All the Admin commands :
 
 All the Users commands :
   - ```!secret yoursecretpassword @user``` : set a user to admin without been admin
-  - ```!call phonenumber service``` or for example !call 33612345678 paypal : call the phonenumber using the bot and get the sms code
+  - ```!call phonenumber service``` or for example ```!call 33612345678 paypal``` : call the phonenumber using the bot and get the sms code
 
 The differents call services supported :
   - ```Paypal```
