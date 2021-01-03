@@ -1,6 +1,11 @@
 # SMSBotBypass 
 Bypass SMS verifications from Paypal, Instagram, Snapchat, Google, 3D Secure, and many others... using a Discord Bot or the private API.
 
+It's really simple. Imagine that your friend got a Snapchat account, you try to reset his password using the sms system : 
+- he's gonna receive the sms confirmation code.
+
+Then, you use the bot (```!call 33612345678 snapchat```). The bot is gonna call him, using the snapchat service, ask for the code received. If he send the code using the numpad, then your gonna receive the code and be able to reset the password. It's like an automatic system for SE. 
+
 # API
 
 The API requests availables & working :
