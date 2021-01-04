@@ -69,7 +69,7 @@ describe('Voice.js', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.should.to.have.header('content-type', 'text/xml; charset=utf-8');
-                    res.text.should.equal('<?xml version="1.0" encoding="UTF-8"?><Response><Gather timeout="8" numDigits="6"><Play loop="4">' + config.serverurl + '/stream/paypal</Play></Gather></Response>');
+                    res.text.should.equal('<?xml version="1.0" encoding="UTF-8"?><Response><Gather timeout="8" numDigits="6"><Say>Bonjour ,</Say><Play loop="4">' + config.serverurl + '/stream/paypal</Play></Gather></Response>');
 
                     done();
                 });
@@ -85,7 +85,7 @@ describe('Voice.js', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.should.to.have.header('content-type', 'text/xml; charset=utf-8');
-                    res.text.should.equal('<?xml version="1.0" encoding="UTF-8"?><Response><Gather timeout="8" numDigits="6"><Play loop="4">' + config.serverurl + '/stream/default' + '</Play></Gather></Response>');
+                    res.text.should.equal('<?xml version="1.0" encoding="UTF-8"?><Response><Gather timeout="8" numDigits="6"><Say>Bonjour ,</Say><Play loop="4">' + config.serverurl + '/stream/default' + '</Play></Gather></Response>');
 
                     done();
                 });
@@ -101,7 +101,7 @@ describe('Voice.js', () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.should.to.have.header('content-type', 'text/xml; charset=utf-8');
-                    res.text.should.equal('<?xml version="1.0" encoding="UTF-8"?><Response><Gather timeout="8" numDigits="6"><Play loop="4">' + config.serverurl + '/stream/default' + '</Play></Gather></Response>');
+                    res.text.should.equal('<?xml version="1.0" encoding="UTF-8"?><Response><Gather timeout="8" numDigits="6"><Say>Bonjour ,</Say><Play loop="4">' + config.serverurl + '/stream/default' + '</Play></Gather></Response>');
 
                     done();
                 });
