@@ -102,6 +102,8 @@ To check if everything works fine, I did a full test system. If your Twilio acco
 
 Your private API now **works** !
 
+Be carefull, you also need to change the TTS Language, go to https://www.twilio.com/console/voice/twiml/text-to-speech and change the TTS Language from English to French with the Lea voice.
+
 # Install the Discord Bot
 
 Take your API Password from you config.js file in your api folder we are gonna use it
