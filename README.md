@@ -79,9 +79,9 @@ Go to our API folder
 
 ```cd /SMSBotBypass/api/```
 
-Initialize the code
+Install the dependencies
 
-```npm init```
+```npm i```
 
 Start the api, wait 15s, and then, stop it
 
