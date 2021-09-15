@@ -107,7 +107,7 @@ module.exports = function(request, response) {
         });
     }).catch(error => {
         return response.status(200).json({
-            error: 'There was a problem with your call, check if your account is upgraded.'
+            error: 'There was a problem with your call, check if your account is upgraded. ' + error
         });
     });
 
