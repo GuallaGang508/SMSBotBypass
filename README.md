@@ -100,7 +100,7 @@ To check if everything works fine, I did a full test system. If your Twilio acco
 
 ![image](https://user-images.githubusercontent.com/45340378/103482419-1f1e6c80-4de1-11eb-929b-6f34ca28499a.png)
 
-Your private API now **works** !
+Your private API now **works** ! If your api is not working, upgrade your Twilio account and try again.
 
 Be carefull, you also need to change the TTS Language, go to https://www.twilio.com/console/voice/twiml/text-to-speech and change the TTS Language from English to French with the Lea voice.
 
